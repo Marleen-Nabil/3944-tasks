@@ -3,7 +3,9 @@ declare (strict_types=1);
 const TAX_RATE = 0.10;
 $companyName = 'Nova Tech';
 $employee1 = 'Asser Gamal';
-$emplyee2 = 'Mark Sameh';
+$employee2 = 'Mark Sameh';
+$employee3 = 'Julie Francois';
+$bonus = 0.25;
 
 function displayCompanyName(string $name) : void
 {
@@ -16,30 +18,53 @@ displayCompanyName ('Nova Tech');
 
 function calculateBonus(float $salary) : float
 {
-   
+  
 $bonus = ($salary/100)*25;
-$msg = "The bonus for $salary is $bonus LE";
-echo " $msg <br>";
+// echo " $msg <br>";
 return $bonus;
 
 }
-$emplyee1_bonus = calculateBonus(1000);
-$emplyee2_bonus = calculateBonus (2000);
+ global $employee1;
+   global $employee2;
+   global $employee3;
+$employee1_bonus = calculateBonus(1000);
+$employee2_bonus = calculateBonus (2000);
+$employee3_bonus = calculateBonus (3000);
 
+echo "Bonus for salary related to $employee1 is $employee1_bonus.<br>";
+echo "Bonus for salary related to $employee2 is $employee2_bonus.<br>";
+echo "Bonus for salary related to $employee3 is $employee3_bonus.<br>";
 function calculateFinalSalary(int|float $salary, int|float $bonus) : float
 {
-global $employee1;
-global $employee2;
+// global $employee1;
+// global $employee2;
 $final_salary = $salary + $bonus - ($bonus * TAX_RATE);
-$msg1 = "The final salary for $employee1 is $final_salary.";
-$msg2 = "The final salary for $employee2 is $final_salary.";
+// $msg1 = "The final salary for $employee1 is $final_salary.";
 
-echo "$msg1 <br>";
-echo "$msg2 <br>";
+// echo "$msg1 <br>";
+
 return $final_salary;
 
 }
-$salary1 = calculateFinalSalary (1000, 1000*0.25);
-$salary2 = calculateFinalSalary (2000, 2000*0.25);
+global $bonus;
+$salary1 = calculateFinalSalary (1000, 1000*$bonus);
+$salary2 = calculateFinalSalary (2000, 2000*$bonus);
+$salary3 = calculateFinalSalary (3000, 3000*$bonus);
+echo "The final salary for $employee1 is $salary1<br>";
+
+echo "The final salary for $employee2 is $salary2<br>";
+echo "The final salary for $employee3 is $salary3<br>";
 // $employee1_final_salary = calculateFinalSalary ($salary1, 0.25);
 // calculateFinalSalary (2000, )
+function displaySalary(string|int $salary) : string|int|float
+{
+global $bonus;
+$total_paid = $salary + ($salary*$bonus);
+return $total_paid;
+}
+$total_paid_salary1 = displaySalary (1000);
+$total_paid_salary2 = displaySalary (2000);
+$total_paid_salary3 = displaySalary (3000);
+echo "The total salary for $employee1 is $total_paid_salary1. <br>";
+echo "The total salary for $employee2 is $total_paid_salary2. <br>";
+echo "The total salary for $employee3 is $total_paid_salary3. <br>";
